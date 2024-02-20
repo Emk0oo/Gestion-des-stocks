@@ -1,6 +1,6 @@
-<div class="flex flex-wrap items-center justify-center ">
+<div class="flex flex-wrap items-center justify-center">
   <div id="calculatrice" class="items-center justify-center px-20 py-10 space-y-4">
-    <div id="topButton" class="flex justify-between grow space-x-1">
+    <div id="topButton" class="flex justify-between grow space-x-1 md:hidden">
       <button id="btn1" class="bg-sky-600 hover:bg-sky-800 text-white font-bold py-2 px-4 border border-sky-400 rounded w-1/2">Saisie</button>
       <button id="btn2" class="bg-sky-600 hover:bg-sky-800 text-white font-bold py-2 px-4 border border-sky-400 rounded w-1/2">Inventaire</button>
     </div>
@@ -54,7 +54,7 @@
       }
     </div>
     <div id="importer" class="flex justify-between grow space-x-1 bg-white shadow-lg rounded-lg p-6 sticky bottom-0">
-      <button class="md:w-full bg-sky-600 hover:bg-sky-800 text-white font-bold py-2 px-4 border border-sky-400 rounded">Importer un CSV</button>
+      <button class="md:w-full bg-sky-600 hover:bg-sky-800 text-white font-bold py-2 px-4 border border-sky-400 rounded" (click)="import()">Importer un CSV</button>
       <button class="md:w-full bg-sky-600 hover:bg-sky-800 text-white font-bold py-2 px-4 border border-sky-400 rounded" (click)="print()">Imprimer</button>
       <button class="md:w-full bg-sky-600 hover:bg-sky-800 text-white font-bold py-2 px-4 border border-sky-400 rounded" (click)="exportCSV()">Exporter en CSV</button>
     </div>
