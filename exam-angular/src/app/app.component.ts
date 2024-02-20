@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -59,6 +58,7 @@ export class AppComponent {
   }
 
   exportCSV() {
+    let date= new Date();
       var options = { 
       fieldSeparator: ',',
       quoteStrings: '"',
@@ -72,7 +72,7 @@ export class AppComponent {
       eol: '\n'
     };
   
-    new ngxCsv(this.tab, 'exportInventaire', options);
+    new ngxCsv(this.tab, 'exportInventaire'+date, options);
   }
 }
 
