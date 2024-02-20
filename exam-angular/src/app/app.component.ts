@@ -74,5 +74,25 @@ export class AppComponent {
   
     new ngxCsv(this.tab, 'exportInventaire'+date, options);
   }
+
+  print() {
+    // Création de la table HTML
+    var table = '<table border="1">';
+    table += '<thead><tr><th>Nom</th><th>Quantités</th><th>Unité</th></tr></thead>';
+    table += '<tbody>';
+    for(let i = 0; i < this.tab.length; i++) {
+        table += '<tr>';
+        table += '<td>' + this.tab[i].nomDuProduit + '</td>';
+        table += '<td>' + this.tab[i].quantite + '</td>';
+        table += '<td>' + this.tab[i].unite + '</td>';
+        table += '</tr>';
+    };
+    table += '</tbody>';
+    table += '</table>';
+
+    document.body.innerHTML = table;
+
+    window.print();
+}
 }
 
