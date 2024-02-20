@@ -47,7 +47,7 @@
   <div id="panneauDroit" class="items-center justify-center px-20 py-10 space-y-4 ">
     <div class="flex flex-col items-center justify-center space-y-4 ">
       @for(item of tab; track item){
-        <div class="flex justify-between w-full bg-white shadow-lg rounded-lg p-6 ">
+        <div class="flex justify-between w-full bg-white shadow-lg rounded-lg p-6 " (click)="update(item)">
           <div class="w-1/2">{{item.nomDuProduit}}</div>
           <div class="w-1/2 text-right">{{item.quantite}}{{item.unite}}</div>
         </div>

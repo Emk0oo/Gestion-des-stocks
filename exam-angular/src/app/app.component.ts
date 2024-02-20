@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
+import { item } from '../interface/item.interface';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ export class AppComponent {
   value1: string | null= null;
   operator: string= "";
   inputUnite: string= "";
-  tab: any[] = [];
+  tab: item[] = [];
+  currentId: number |null = null;
 
   addNumber(number: string){
     this.value1= number;
@@ -39,12 +41,22 @@ export class AppComponent {
   }
 
   sendToInventory(){
+    console.log('ici')
     let objet = {
+      id: Math.random(),
       nomDuProduit: this.inputNomDuProduit,
       quantite: this.inputResult,
-      unite: this.inputUnite
+      unite: this.inputUnite,
+      calcul: this.inputCalc
     }
-    this.tab.push(objet);
+    if(this.currentId==null){
+      this.tab.push(objet);
+    } else{
+      let index : number = this.tab.findIndex((item) => item.id === this.currentId);
+      this.tab[index] = objet;
+      this.currentId = null;
+    }
+
     localStorage.setItem("inventaire", JSON.stringify(this.tab));
   }
 
@@ -93,6 +105,16 @@ export class AppComponent {
     document.body.innerHTML = table;
 
     window.print();
+}
+
+update(item: item) {
+  this.inputNomDuProduit = item.nomDuProduit;
+  this.inputCalc = item.calcul;
+  this.inputResult = item.quantite;
+  this.inputUnite = item.unite;
+  this.currentId = item.id;
+
+
 }
 }
 
