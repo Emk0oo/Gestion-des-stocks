@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { item } from '../interface/item.interface';
+import { evaluate } from 'mathjs';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,13 @@ export class AppComponent {
   }
 
   execCalc() {
-    this.inputResult = eval(this.inputCalc);
+    try {
+      this.inputResult = evaluate(this.inputCalc);
+    }
+    catch (e) {
+      this.inputResult = 'Erreur';
+    }
+    // this.inputResult = eval(this.inputCalc);
   }
 
   clear() {
@@ -40,7 +47,6 @@ export class AppComponent {
   }
 
   sendToInventory() {
-    console.log('ici');
     let objet = {
       id: Math.random(),
       nomDuProduit: this.inputNomDuProduit,
