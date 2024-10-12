@@ -33,8 +33,7 @@ export class AppComponent {
   execCalc() {
     try {
       this.inputResult = evaluate(this.inputCalc);
-    }
-    catch (e) {
+    } catch (e) {
       this.inputResult = 'Erreur';
     }
     // this.inputResult = eval(this.inputCalc);
@@ -77,21 +76,21 @@ export class AppComponent {
   }
 
   exportCSV() {
-    let date = new Date();
-    var options = {
-      fieldSeparator: ',',
-      quoteStrings: '"',
-      decimalseparator: '.',
-      showLabels: true,
-      showTitle: true,
-      title: "Exportation de l'inventaire",
-      useBom: true,
-      noDownload: false,
-      headers: ['Nom du Produit', 'Quantités', 'Unité'],
-      eol: '\n',
-    };
+    let csvContent = 'data:text/csv;charset=utf-8,';
+    csvContent += 'Nom du Produit,Quantités,Unité\n';
 
-    new ngxCsv(this.tab, 'exportInventaire' + date, options);
+    this.tab.forEach((item) => {
+      const row = `${item.nomDuProduit},${item.quantite},${item.unite}`;
+      csvContent += row + '\n';
+    });
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'exportInventaire.csv');
+    document.body.appendChild(link);
+
+    link.click();
   }
 
   print() {
@@ -123,7 +122,7 @@ export class AppComponent {
     this.currentId = item.id;
   }
 
-  import(){
+  import() {
     alert('Fonctionnalité non implémentée');
   }
 }
